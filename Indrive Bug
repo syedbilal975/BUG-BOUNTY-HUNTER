@@ -1,0 +1,15 @@
+Based on the provided information, it appears there is a Server-Side Request Forgery (SSRF) vulnerability in the url parameter of the https://couriers.indrive.com/api/file-storage endpoint. This vulnerability allows an attacker to manipulate the url parameter to make requests to arbitrary external resources, potentially leading to information disclosure or other malicious actions.
+
+To demonstrate this vulnerability:
+
+Send a GET request to https://couriers.indrive.com/api/file-storage?url=http://va99zfc0lxpm75ogmcjhz8xij9pzdo.oastify.com, replacing the url parameter value with your Burp Collaborator URL.
+
+Observe the response from the server, which should include the content of the external resource specified in the manipulated url parameter.
+
+The response should contain the content of the requested resource, indicating that the server is vulnerable to SSRF attacks.
+
+This vulnerability arises because the server does not properly sanitize or validate the input provided in the url parameter, allowing attackers to specify arbitrary URLs and interact with external resources.
+
+The impact of this vulnerability includes potential information disclosure and unauthorized access to internal resources. An attacker could exploit this vulnerability to bypass security controls, access sensitive data, or perform further attacks on the server or other systems.
+
+To mitigate this vulnerability, it is essential to implement proper input validation and sanitization on the server side to ensure that user-supplied input, such as the url parameter, is properly restricted to authorized resources. Additionally, access controls and network segmentation can help limit the scope of potential SSRF attacks.
